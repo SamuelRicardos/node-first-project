@@ -1,1 +1,1 @@
-# node-first-project
+# Primeiro projeto node na Dev Samurai
