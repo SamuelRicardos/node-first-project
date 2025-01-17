@@ -8,7 +8,7 @@ server.get("/hello", (req, res) => {
 
     return res.json({ 
         title:  "Hello world",
-        message: `Olá ${nome} tudo bem!?`,
+        message: `Olá ${nome} tudo bem com você!?`,
         idade: idade
     });
 });
