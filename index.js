@@ -2,27 +2,25 @@
 const express = require("express");
 // iniciando o servidor do express
 const server = express();
-// Query params tem parametros opcionais
-server.get("/hello", (req, res) => {
-    const { nome, idade} = req.query;
+server.use(express.json())
 
-    return res.json({ 
-        title:  "Hello world",
-        message: `Olá ${nome} tudo bem com você!?`,
-        idade: idade
-    });
-});
+let customers = [
+    { id: 1, name: "Dev Samurai", site: "http://devsamurai.com.br"},
+    { id: 2, name: "Google", site: "http://google.com"}
+];
 
-// Route params tem parametros obrigatórios na rota do endpoint
-server.get("/hello/:nome/:idade", (req,res) => {
-    const { nome, idade } = req.params;
+server.get("/customers", (req,res) => {
+    return res.json(customers)
+})
 
-    return res.json({ 
-        title:  "Hello world",
-        message: `Olá ${nome} tudo bem!?`,
-        idade: idade
-    });
-});
+server.get("/customers/:id", (req,res) => {
+    const id = parseInt(req.params.id)
+    // se o id que recebe como parametro for igual ao id dentro do array, retorne 200 e json
+    const customer = customers.find(item => item.id === id)
+    const status = customer ? 200: 404;
+
+    return res.status(status).json(customer)
+})
 
 // escolhendo a porta que o servidor vai iniciar
 server.listen(3000);
