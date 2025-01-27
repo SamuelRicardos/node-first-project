@@ -19,6 +19,8 @@ server.get("/customers/:id", (req,res) => {
     const customer = customers.find(item => item.id === id)
     const status = customer ? 200: 404;
 
+    console.log("get:", customer)
+
     return res.status(status).json(customer)
 });
 
@@ -50,7 +52,7 @@ server.put("/customers/:id",(req, res) => {
 server.delete("/customers/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const index = customers.findIndex(item => item.id === id)
-    const status = index >= 0 ? 200 : 404
+    const status = index >= 0 ? 200 : 404;
 
     if( index >= 0) {
         customers.splice(index, 1);
